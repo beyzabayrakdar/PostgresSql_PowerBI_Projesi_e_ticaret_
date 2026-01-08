@@ -1,0 +1,186 @@
+-- Tabloları oluşturuyoruz. 
+
+CREATE TABLE Kategoriler (
+    kategori_id INT PRIMARY KEY,
+    kategori_adi VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Musteriler (
+    musteri_id INT PRIMARY KEY,
+    ad VARCHAR(50) NOT NULL,
+    soyad VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    sehir VARCHAR(50),
+    ulke VARCHAR(50),
+    kayit_tarihi DATE
+);
+
+CREATE TABLE Urunler (
+    urun_id INT PRIMARY KEY,
+    urun_adi VARCHAR(100) NOT NULL,
+    kategori_id INT,
+    alis_fiyati DECIMAL(10,2),
+    satis_fiyati DECIMAL(10,2),
+    stok INT,
+    CONSTRAINT fk_urun_kategori
+        FOREIGN KEY (kategori_id)
+        REFERENCES Kategoriler(kategori_id)
+);
+
+CREATE TABLE Siparisler (
+    siparis_id INT PRIMARY KEY,
+    musteri_id INT,
+    siparis_tarihi DATE,
+    kargo_firmasi VARCHAR(50),
+    durum VARCHAR(30),
+    CONSTRAINT fk_siparis_musteri
+        FOREIGN KEY (musteri_id)
+        REFERENCES Musteriler(musteri_id)
+);
+
+CREATE TABLE Siparis_Detay (
+    detay_id INT PRIMARY KEY,
+    siparis_id INT,
+    urun_id INT,
+    miktar INT,
+    birim_fiyati DECIMAL(10,2),
+    indirim DECIMAL(10,2),
+    CONSTRAINT fk_detay_siparis
+        FOREIGN KEY (siparis_id)
+        REFERENCES Siparisler(siparis_id),
+    CONSTRAINT fk_detay_urun
+        FOREIGN KEY (urun_id)
+        REFERENCES Urunler(urun_id)
+);
+
+-- Tablolara veri ekliyoruz.
+
+INSERT INTO Kategoriler VALUES
+(1, 'Bilgisayar & Mobil'),
+(2, 'Aksesuar'),
+(3, 'Ofis Ürünleri'),
+(4, 'Depolama & Enerji');
+
+INSERT INTO Musteriler VALUES
+(1,'Ahmet','Yılmaz','ahmet.yilmaz@mail.com','İstanbul','Türkiye','2023-01-15'),
+(2,'Ayşe','Demir','ayse.demir@mail.com','Ankara','Türkiye','2023-02-10'),
+(3,'Mehmet','Kaya','mehmet.kaya@mail.com','İzmir','Türkiye','2023-03-05'),
+(4,'Elif','Çelik','elif.celik@mail.com','Bursa','Türkiye','2023-03-20'),
+(5,'Can','Arslan','can.arslan@mail.com','Antalya','Türkiye','2023-04-01'),
+(6,'Zeynep','Koç','zeynep.koc@mail.com','Konya','Türkiye','2023-04-18'),
+(7,'Murat','Aydın','murat.aydin@mail.com','Adana','Türkiye','2023-05-03'),
+(8,'Fatma','Şahin','fatma.sahin@mail.com','Gaziantep','Türkiye','2023-05-25'),
+(9,'Emre','Öztürk','emre.ozturk@mail.com','Eskişehir','Türkiye','2023-06-10'),
+(10,'Selin','Erdoğan','selin.erdogan@mail.com','Muğla','Türkiye','2023-06-30'),
+(11,'Burak','Kurt','burak.kurt@mail.com','İstanbul','Türkiye','2023-07-05'),
+(12,'Derya','Aksoy','derya.aksoy@mail.com','İzmir','Türkiye','2023-07-08'),
+(13,'Onur','Polat','onur.polat@mail.com','Ankara','Türkiye','2023-07-10'),
+(14,'Gizem','Yıldız','gizem.yildiz@mail.com','Samsun','Türkiye','2023-07-12'),
+(15,'Serkan','Doğan','serkan.dogan@mail.com','Trabzon','Türkiye','2023-07-15'),
+(16,'Pelin','Uçar','pelin.ucar@mail.com','Denizli','Türkiye','2023-07-18'),
+(17,'Hakan','Eren','hakan.eren@mail.com','Kocaeli','Türkiye','2023-07-20'),
+(18,'Melis','Toprak','melis.toprak@mail.com','Tekirdağ','Türkiye','2023-07-22'),
+(19,'Volkan','Sarı','volkan.sari@mail.com','Manisa','Türkiye','2023-07-25'),
+(20,'Nazlı','Güneş','nazli.gunes@mail.com','Aydın','Türkiye','2023-07-28');
+
+INSERT INTO Urunler VALUES
+(1,'Laptop',1,15000,18000,50),
+(2,'Akıllı Telefon',1,12000,15000,80),
+(3,'Kulaklık',2,500,900,200),
+(4,'Klavye',2,400,750,150),
+(5,'Mouse',2,300,600,180),
+(6,'Monitör',1,3500,5000,40),
+(7,'Yazıcı',3,2500,3800,30),
+(8,'Tablet',1,7000,9000,60),
+(9,'Powerbank',4,350,700,120),
+(10,'Harici Disk',4,1500,2300,70),
+(11,'Bluetooth Hoparlör',2,1200,1800,90),
+(12,'Akıllı Saat',1,2500,3500,75),
+(13,'Web Kamera',2,800,1300,110),
+(14,'Router',3,900,1600,65),
+(15,'SSD Disk 1TB',4,2200,3200,55);
+
+INSERT INTO Siparisler VALUES
+(1,1,'2023-07-01','Yurtiçi Kargo','Teslim Edildi'),
+(2,2,'2023-07-02','Aras Kargo','Teslim Edildi'),
+(3,3,'2023-07-03','MNG Kargo','Kargoda'),
+(4,4,'2023-07-04','PTT Kargo','Hazırlanıyor'),
+(5,5,'2023-07-05','Yurtiçi Kargo','Teslim Edildi'),
+(6,6,'2023-07-06','Aras Kargo','İptal Edildi'),
+(7,7,'2023-07-07','MNG Kargo','Teslim Edildi'),
+(8,8,'2023-07-08','PTT Kargo','Kargoda'),
+(9,9,'2023-07-09','Yurtiçi Kargo','Teslim Edildi'),
+(10,10,'2023-07-10','Aras Kargo','Hazırlanıyor'),
+(11, 11, '2023-07-11', 'Aras Kargo', 'Teslim Edildi'),
+(12, 12, '2023-07-12', 'Yurtiçi Kargo', 'Kargoda'),
+(13, 13, '2023-07-13', 'MNG Kargo', 'Teslim Edildi'),
+(14, 14, '2023-07-14', 'PTT Kargo', 'Hazırlanıyor'),
+(15, 15, '2023-07-15', 'Aras Kargo', 'Teslim Edildi'),
+(16, 16, '2023-07-16', 'Yurtiçi Kargo', 'Teslim Edildi'),
+(17, 17, '2023-07-17', 'MNG Kargo', 'Kargoda'),
+(18, 18, '2023-07-18', 'PTT Kargo', 'Teslim Edildi'),
+(19, 19, '2023-07-19', 'Aras Kargo', 'İptal Edildi'),
+(20, 20, '2023-07-20', 'Yurtiçi Kargo', 'Teslim Edildi'),
+(21, 5,  '2023-07-21', 'MNG Kargo', 'Teslim Edildi'),
+(22, 3,  '2023-07-22', 'Aras Kargo', 'Kargoda'),
+(23, 7,  '2023-07-23', 'PTT Kargo', 'Hazırlanıyor'),
+(24, 9,  '2023-07-24', 'Yurtiçi Kargo', 'Teslim Edildi'),
+(25, 2,  '2023-07-25', 'Aras Kargo', 'Teslim Edildi');
+
+INSERT INTO Siparis_Detay VALUES
+(1,1,1,1,18000,0),
+(2,2,2,1,15000,500),
+(3,3,3,2,900,100),
+(4,4,4,1,750,0),
+(5,5,5,2,600,50),
+(6,6,6,1,5000,0),
+(7,7,7,1,3800,300),
+(8,8,8,1,9000,500),
+(9,9,9,3,700,100),
+(10,10,10,1,2300,0),
+(11, 11, 3, 2, 900, 100),
+(12, 12, 5, 1, 600, 0),
+(13, 13, 1, 1, 18000, 1000),
+(14, 14, 4, 1, 750, 0),
+(15, 15, 2, 1, 15000, 500),
+(16, 16, 6, 1, 5000, 0),
+(17, 17, 9, 2, 700, 50),
+(18, 18, 8, 1, 9000, 750),
+(19, 19, 10, 1, 2300, 0),
+(20, 20, 11, 1, 1800, 200),
+(21, 21, 12, 1, 3500, 300),
+(22, 22, 13, 2, 1300, 100),
+(23, 23, 14, 1, 1600, 0),
+(24, 24, 15, 1, 3200, 200),
+(25, 25, 7, 1, 3800, 300);
+
+-- En çok satan ürün 
+
+SELECT u.urun_id, u.urun_adi, SUM(sd.miktar) AS toplam_satis_miktari FROM Siparis_Detay sd 
+JOIN Urunler u ON sd.urun_id = u.urun_id
+GROUP BY u.urun_id, u.urun_adi
+ORDER BY toplam_satis_miktari DESC
+LIMIT 1;
+
+-- En çok ciro yapan ürün
+
+SELECT u.urun_adi, SUM((sd.birim_fiyati - sd.indirim) * sd.miktar) AS toplam_ciro FROM Siparis_Detay sd
+JOIN Urunler u ON sd.urun_id = u.urun_id
+GROUP BY u.urun_adi
+ORDER BY toplam_ciro DESC
+LIMIT 1;
+
+-- Tüm kargo firmalarının kullanım sayısı
+
+SELECT kargo_firmasi, COUNT(*) AS siparis_sayisi FROM Siparisler
+GROUP BY kargo_firmasi
+ORDER BY siparis_sayisi DESC;
+
+-- Aras kargo ile gönderilen siparişlerin şehirleri
+
+SELECT m.sehir, COUNT(*) AS siparis_sayisi FROM Siparisler s
+JOIN Musteriler m ON s.musteri_id = m.musteri_id
+WHERE s.kargo_firmasi = 'Aras Kargo'
+GROUP BY m.sehir
+ORDER BY siparis_sayisi DESC;
+
