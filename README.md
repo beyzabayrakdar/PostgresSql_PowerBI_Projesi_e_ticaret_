@@ -3,8 +3,8 @@ Bu proje, YETGİM / Techcareer bünyesinde alınan eğitim sürecinin sonunda ge
 
 # Eğitim Kapsamı
 Bu proje; YETGİM / Techcareer iş birliğiyle yürütülen eğitim süreci kapsamında edinilen yetkinlikleri pekiştirmek amacıyla hazırlanmıştır.
- PostgreSQL üzerinde SQL sorguları yazarak veri analizi gerçekleştirme
-• İlişkisel veritabanı tasarımı ve veri modelleme süreçlerini uygulama
-• Power BI kullanarak dinamik ve karar destek odaklı raporlar oluşturma
-• Verileri yorumlama, analiz etme ve iş sonuçlarına dönüştürme becerisi kazanma
+• PostgreSQL üzerinde SQL sorguları yazarak veri analizi gerçekleştirme;
+• İlişkisel veritabanı tasarımı ve veri modelleme süreçlerini uygulama;
+• Power BI kullanarak dinamik ve karar destek odaklı raporlar oluşturma;
+• Verileri yorumlama, analiz etme ve iş sonuçlarına dönüştürme becerisi kazanma;
 • Analitik düşünme ve problem çözme yaklaşımını geliştirme
