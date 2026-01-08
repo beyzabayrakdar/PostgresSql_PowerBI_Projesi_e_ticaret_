@@ -1,0 +1,1 @@
+# PostgresSql_PowerBI_Projesi_e_ticaret_
