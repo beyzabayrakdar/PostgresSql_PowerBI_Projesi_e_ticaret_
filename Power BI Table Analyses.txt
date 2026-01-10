@@ -1,0 +1,22 @@
+• Çubuk Grafiği ile En Çok Satan Ürün Analizi
+
+Toplam Satış Miktarı = CALCULATE(SUM(Siparis_Detay[miktar]),Siparisler[durum] = "Teslim Edildi")
+
+• Alan Grafiği ile Kargo Firmalarının Ciro Analizi
+
+Toplam Ciro = CALCULATE(SUMX(Siparis_Detay,(Siparis_Detay[Birim Fiyati] - Siparis_Detay[Indirim]) * Siparis_Detay[Miktar]),
+    Siparisler[Durum] = "Teslim Edildi"
+)
+
+• Map Görseli ile Şehirlere Göre Sipariş Yoğunluk Analizi
+• Map Görseli ile Şehirlere Göre Kargo Firması Analizi
+
+Toplam Sipariş Sayısı = CALCULATE(COUNT(Siparisler[Siparis id]), Siparisler[durum]= "Teslim Edildi")
+
+• Ağaç Haritası ile Hangi Kategori Daha Çok Kar Getirmiş Analizi
+
+Toplam Kar = CALCULATE(SUMX(Siparis_Detay,((Siparis_Detay[Birim Fiyati] - Siparis_Detay[Indirim])- RELATED(Urunler[Alis Fiyati])) * Siparis_Detay[Miktar]), Siparisler[Durum] = "Teslim Edildi")
+
+• Ürünlerin Ortalama İndirim Tutar Kartları Analizi
+
+Ortalama Indirim Tutarı = CALCULATE(AVERAGE(Siparis_Detay[Indirim]),Siparisler[Durum] = "Teslim Edildi")
